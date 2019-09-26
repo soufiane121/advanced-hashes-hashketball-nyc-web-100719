@@ -74,8 +74,6 @@ def team_names
  answer
 end
  
-#<<<<<<< HEAD
-
 def player_numbers(arg)
   answer=[]
   game_hash.each do |home_away, teams_values|
@@ -189,8 +187,6 @@ def long_name_steals_a_ton?
   answer == player_with_longest_name ? true : false
  end
 
-#=======
-#>>>>>>> f23d595edf8f01b49c2db85e37f48443dfb311e0
 
 def player_numbers(arg)
   answer=[]
