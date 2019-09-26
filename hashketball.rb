@@ -269,7 +269,7 @@ else
 end
  end
  
-ddef player_with_longest_name
+def player_with_longest_name
   new_name = 0
   wining_name = []
    game_hash.each do |home_away, teams_values|
