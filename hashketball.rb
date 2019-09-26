@@ -74,7 +74,6 @@ def team_names
  answer
 end
  
-
 def player_numbers(arg)
   answer=[]
   game_hash.each do |home_away, teams_values|
@@ -189,7 +188,99 @@ def long_name_steals_a_ton?
  end
 
 
+def player_numbers(arg)
+  answer=[]
+  game_hash.each do |home_away, teams_values|
+  teams_values.each do |k,v|
+ game_hash[home_away].values[2][0].each do |singler_player, single_player_info|
+  if game_hash[home_away][:team_name] == arg
+     answer << single_player_info[:number]
+ end
+end
+ end
+end
+answer.sort.uniq
+ end
+
+ def player_stats(arg)
+final_hash = {}
+game_hash.each do |home_away, teams_values|
+teams_values.each do |k,v|
+   game_hash[home_away].values[2][0].each do |singler_player, single_player_info|
+if singler_player == arg
+  final_hash = single_player_info
+  end
+end
+end
+end
+final_hash.sort_by {|k1,v1| k1}.to_h
+ end
 
 
+ def big_shoe_rebounds
+  last = 0
+  answer=0
+  new_siz = 0
+  game_hash.each do |home_away,teams_values|
+    teams_values.each do |k,v|
+      game_hash[home_away][:players][0].each do |singler_player,single_player_info|
+        last= single_player_info[:shoe] 
+        if last > new_siz
+          new_siz = last
+          answer=  single_player_info[:rebounds]
+      end
+      end
+    end
+   end
+   answer
+ end
+ 
+  def most_points_scored
+  old_point= 0
+  new_point = 0
+  name=""
+   game_hash.each do |home_away, teams_values|
+      game_hash[home_away][:players][0].each do |k,v|
+      old_point= v[:points]
+      if old_point > new_point
+        new_point = old_point
+        name = k
+      end
+      end
+  end
+  name
+ end
 
+
+ def winning_team
+home_point=[]
+away_point = []
+game_hash[:home][:players][0].each do |k,v|
+home_point << v[:points]
+# binding.pry
+end
+game_hash[:away][:players][0].each do |k2,v2|
+away_point << v2[:points]
+end
+if away_point.sum > home_point.sum
+  return game_hash[:away][:team_name]
+else
+  return game_hash[:home][:team_name]
+end
+ end
+ 
+def player_with_longest_name
+  new_name = 0
+  wining_name = []
+   game_hash.each do |home_away, teams_values|
+     game_hash[home_away][:players][0].each do |names,values|
+      names
+     if names.length > new_name
+       new_name = names.length
+       wining_name << names
+     end
+    end
+   end
+   wining_name[0].length > wining_name[1].length ? wining_name[0] : wining_name[1]
+ end
 
