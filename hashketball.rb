@@ -269,17 +269,18 @@ else
 end
  end
  
-def player_with_longest_name
-  old_name = 0
+ddef player_with_longest_name
   new_name = 0
+  wining_name = []
    game_hash.each do |home_away, teams_values|
      game_hash[home_away][:players][0].each do |names,values|
-      old_name= names.length
-     if old_name > new_name
-       new_name = old_name
-       return names
+      names
+     if names.length > new_name
+       new_name = names.length
+       wining_name << names
      end
     end
    end
+   wining_name[0].length > wining_name[1].length ? wining_name[0] : wining_name[1]
  end
 
